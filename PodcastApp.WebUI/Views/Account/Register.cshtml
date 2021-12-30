@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+    }
+
+    #regiser .container #regiser-row #regiser-column #regiser-box {
+        margin-top: 120px;
+        max-width: 600px;
+        min-height: 320px;
+        border: 1px solid #9C9C9C;
+        background-color: #EAEAEA;
+    }
+
+        #regiser .container #regiser-row #regiser-column #regiser-box #regiser-form {
+            padding: 20px;
+        }
+
+            #regiser .container #regiser-row #regiser-column #regiser-box #regiser-form #regiser-link {
+                margin-top: -85px;
+            }
+</style>
+<div id="regiser">
+    <div class="container">
+        <div id="regiser-row" class="row justify-content-center align-items-center">
+            <div id="regiser-column" class="col-md-6">
+                <div id="regiser-box" class="col-md-12">
+                    <form id="regiser-form" class="form" action="@Url.Action("Register", "Account", new { area = "" })" method="post">
+                        <h3 class="text-center text-info">Regiser</h3>
+                        <div class="form-group">
+                            <label for="email" class="text-info">Email:</label><br>
+                            <input type="email" name="email" id="email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="text-info">Password:</label><br>
+                            <input type="text" name="password" id="password" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm-password" class="text-info">Confirm Password:</label><br>
+                            <input type="text" name="confirm-password" id="confirm-password" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+                                </div>
+                                <div class="col-md-6" style="text-align:right;">
+                                    <a href="@Url.Action("Login", "Account", new { area = "" })" class="text-info">Login here!</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+
+    <script>
+        $(document).on("keyup","#password", function () {
+           
+        });
+    </script>
+}
