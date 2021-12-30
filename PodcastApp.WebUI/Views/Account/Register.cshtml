@@ -8,11 +8,15 @@
     body {
         margin: 0;
         padding: 0;
-        height: 100vh;
+    }
+    .footer {
+        margin-top: 20px;
+        position:relative;
     }
 
     #regiser .container #regiser-row #regiser-column #regiser-box {
-        margin-top: 120px;
+        margin-top: 20px;
+        margin-bottom: 20px;
         max-width: 600px;
         min-height: 320px;
         border: 1px solid #9C9C9C;
@@ -35,16 +39,34 @@
                     <form id="regiser-form" class="form" action="@Url.Action("Register", "Account", new { area = "" })" method="post">
                         <h3 class="text-center text-info">Regiser</h3>
                         <div class="form-group">
+                            <label for="firstname" class="text-info">First Name:</label><br>
+                            <input type="text" name="firstname" id="firstname" class="form-control">
+                            <div class="invalid-feedback">First name can not be empty</div>
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastname" class="text-info">Last Name:</label><br>
+                            <input type="text" name="lastname" id="lastname" class="form-control">
+                            <div class="invalid-feedback">Last name can not be empty</div>
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="form-group">
                             <label for="email" class="text-info">Email:</label><br>
                             <input type="email" name="email" id="email" class="form-control">
+                            <div class="invalid-feedback">Please enter a valid email address</div>
+                            <div class="valid-feedback">Looks good!</div>
                         </div>
                         <div class="form-group">
                             <label for="password" class="text-info">Password:</label><br>
-                            <input type="text" name="password" id="password" class="form-control">
+                            <input type="password" name="password" id="password" class="form-control">
+                            <div class="invalid-feedback">Password must be at least 8 characters and contians 1 capital letter, 1 small letter, 1 special character and 1 digit</div>
+                            <div class="valid-feedback">Looks good!</div>
                         </div>
                         <div class="form-group">
                             <label for="confirm-password" class="text-info">Confirm Password:</label><br>
-                            <input type="text" name="confirm-password" id="confirm-password" class="form-control">
+                            <input type="password" name="confirm-password" id="confirm-password" class="form-control">
+                            <div class="invalid-feedback">Confirmed password does not match the password</div>
+                            <div class="valid-feedback">Looks good!</div>
                         </div>
                         <div class="form-group">
                             <div class="row">
@@ -65,8 +87,57 @@
 @section Scripts{
 
     <script>
-        $(document).on("keyup","#password", function () {
-           
+
+        $(document).on("keyup", "#password", function () {
+            var input_pass = $("#password").val();
+            var legnth = input_pass.length;
+            var hasCapitalletter = input_pass.toLowerCase() != input_pass;
+            var hasSmallLetter = input_pass.toUpperCase() != input_pass;
+            var hasDigits = /\d/.test(input_pass);
+            if (legnth >= 8 && hasCapitalletter && hasSmallLetter && hasDigits) {
+                $("#password").addClass('is-valid');
+                $("#password").removeClass('is-invalid');
+            } else {
+                $("#password").addClass('is-invalid');
+                $("#password").removeClass('is-valid');
+            }
         });
+
+        $(document).on("keyup", "#confirm-password", function () {
+            var input_pass = $("#password").val();
+            var confirm_pass = $("#confirm-password").val();
+            if (input_pass !== confirm_pass) {
+                $("#confirm-password").addClass('is-invalid');
+                $("#confirm-password").removeClass('is-valid');
+            } else {
+                $("#confirm-password").addClass('is-valid');
+                $("#confirm-password").removeClass('is-invalid');
+            }
+        });
+
+
+
+        $(document).on("keyup", "#email", function () {
+
+            var email = $("#email").val();
+
+           var validEmail =  email.match(
+                /^(([^<>()[\]\\.,;:\s@@\"]+(\.[^<>()[\]\\.,;:\s@@\"]+)*)|(\".+\"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
+            if (!validEmail) {
+                $("#email").addClass('is-invalid');
+                $("#email").removeClass('is-valid');
+            } else {
+                $("#email").addClass('is-valid');
+                $("#email").removeClass('is-invalid');
+            }
+        });
+
+
+        $('#regiser-form').submit(function () {
+            alert("test");
+            return true; // return false to cancel form action
+        });
+
     </script>
 }
