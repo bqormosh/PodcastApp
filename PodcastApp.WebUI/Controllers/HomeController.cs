@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace PodcastApp.WebUI.Controllers
 {
-
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

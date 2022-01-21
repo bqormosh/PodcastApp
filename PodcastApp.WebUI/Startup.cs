@@ -26,7 +26,7 @@ namespace PodcastApp.WebUI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRepository(Configuration.GetConnectionString("DefaultConnection"));
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>(); ;
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>(); ;
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             //services.AddControllersWithViews();
@@ -49,7 +49,7 @@ namespace PodcastApp.WebUI
             app.UseStaticFiles();
             
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
