@@ -107,5 +107,13 @@ namespace PodcastApp.WebUI.Controllers
             return View(registerViewModel);
 
         }
+
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            _logger.LogInformation("User logged out.");
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
