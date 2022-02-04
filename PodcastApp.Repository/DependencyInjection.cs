@@ -14,6 +14,7 @@ namespace PodcastApp.Repository
         {
 
             services.AddTransient<IPodcastRepository, PodcastRepository>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
            
             services.AddDbContext<ApplicationDbContext>(opt => opt

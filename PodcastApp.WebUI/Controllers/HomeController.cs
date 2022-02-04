@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PodcastApp.Domain.Interfaces;
+using PodcastApp.Domain.Models;
 using PodcastApp.WebUI.Models;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,8 @@ namespace PodcastApp.WebUI.Controllers
 
         public IActionResult Index()
         {
-
+            _unitOfWork.Categories.Add(new Category {Name ="My first category",Description ="testing categories" });
+            _unitOfWork.Complete();
             return View();
         }
 

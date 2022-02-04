@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PodcastApp.Domain.Interfaces;
+using PodcastApp.Domain.Models;
 using PodcastApp.Repository;
 using PodcastApp.WebUI.Models;
 using System;

@@ -1,13 +1,44 @@
 ﻿@model RegisterViewModel
 @{
     ViewData["Title"] = "Register";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "";
 }
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PodcastApp.WebUI</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Content/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="~/Content/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="~/Content/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="~/Content/plugins/jqvmap/jqvmap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Content/dist/css/adminlte.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="~/Content/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="~/Content/plugins/daterangepicker/daterangepicker.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="~/Content/plugins/summernote/summernote-bs4.min.css">
+</head>
 <style>
     body {
         margin: 0;
         padding: 0;
+        background-image: url('../Content/dist/img/podcast-background.jpg');
+        background-repeat: no-repeat;
+        background-size: 1800px 1200px;
     }
 
     .footer {
@@ -21,9 +52,12 @@
         max-width: 600px;
         min-height: 320px;
         border: 1px solid #9C9C9C;
-        background-color: #EAEAEA;
+        background-color: #385066;
     }
-
+    #regiser-box {
+        min-height: 350px;
+        border-radius: 10px;
+    }
         #regiser .container #regiser-row #regiser-column #regiser-box #regiser-form {
             padding: 20px;
         }
@@ -32,185 +66,229 @@
                 margin-top: -85px;
             }
 </style>
-<div id="regiser">
-    <div class="container">
-        <div id="regiser-row" class="row justify-content-center align-items-center">
-            <div id="regiser-column" class="col-md-6">
-                <div id="regiser-box" class="col-md-12">
-                    <form id="regiser-form" class="form" action="@Url.Action("Register", "Account", new { area = "" })" method="post">
-                        @Html.AntiForgeryToken()
-                        <h3 class="text-center text-info">Regiser</h3>
-                        <div class="text-danger">
-                            @Html.ValidationSummary(false)
-                        </div>
-                        <div class="form-group">
-                            <label for="firstname" class="text-info">First Name:</label><br>
-                            <input type="text" id="firstname" class="form-control" asp-for="FirstName">
-                            <div class="invalid-feedback">First name can not be empty</div>
-                            <div class="valid-feedback">Looks good!</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="lastname" class="text-info">Last Name:</label><br>
-                            <input type="text" id="lastname" class="form-control" asp-for="LastName">
-                            <div class="invalid-feedback">Last name can not be empty</div>
-                            <div class="valid-feedback">Looks good!</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="email" class="text-info">Email:</label><br>
-                            <input type="email" id="email" class="form-control" asp-for="Email">
-                            <div class="invalid-feedback">Please enter a valid email address</div>
-                            <div class="valid-feedback">Looks good!</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="password" class="text-info">Password:</label><br>
-                            <input type="password" id="password" class="form-control" asp-for="Password">
-                            <div class="invalid-feedback">Password must be at least 8 characters and contians 1 capital letter, 1 small letter, 1 special character and 1 digit</div>
-                            <div class="valid-feedback">Looks good!</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="confirm-password" class="text-info">Confirm Password:</label><br>
-                            <input type="password" id="confirm-password" class="form-control" asp-for="ConfirmPassowrd">
-                            <div class="invalid-feedback">Confirmed password does not match the password</div>
-                            <div class="valid-feedback">Looks good!</div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
-                                </div>
-                                <div class="col-md-6" style="text-align:right;">
-                                    <a href="@Url.Action("Login", "Account", new { area = "" })" class="text-info">Login here!</a>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div id="regiser">
+        <div class="container">
+            <div id="regiser-row" class="row justify-content-center align-items-center">
+                <div id="regiser-column" class="col-md-6">
+                    <div id="regiser-box" class="col-md-12">
+                        <form id="regiser-form" class="form" action="@Url.Action("Register", "Account", new { area = "" })" method="post">
+                            @Html.AntiForgeryToken()
+                            <h3 class="text-center text-info">Regiser</h3>
+                            <div class="text-danger">
+                                @Html.ValidationSummary(false)
+                            </div>
+                            <div class="form-group">
+                                <label for="firstname" class="text-info">First Name:</label><br>
+                                <input type="text" id="firstname" class="form-control" asp-for="FirstName">
+                                <div class="invalid-feedback">First name can not be empty</div>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname" class="text-info">Last Name:</label><br>
+                                <input type="text" id="lastname" class="form-control" asp-for="LastName">
+                                <div class="invalid-feedback">Last name can not be empty</div>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="text-info">Email:</label><br>
+                                <input type="email" id="email" class="form-control" asp-for="Email">
+                                <div class="invalid-feedback">Please enter a valid email address</div>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="text-info">Password:</label><br>
+                                <input type="password" id="password" class="form-control" asp-for="Password">
+                                <div class="invalid-feedback">Password must be at least 8 characters and contians 1 capital letter, 1 small letter, 1 special character and 1 digit</div>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password" class="text-info">Confirm Password:</label><br>
+                                <input type="password" id="confirm-password" class="form-control" asp-for="ConfirmPassowrd">
+                                <div class="invalid-feedback">Confirmed password does not match the password</div>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+                                    </div>
+                                    <div class="col-md-6" style="text-align:right;">
+                                        <a href="@Url.Action("Login", "Account", new { area = "" })" class="text-info">Login here!</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-@section Scripts{
-    <partial name="_ValidationScriptsPartial" />
+    <!-- jQuery -->
+    <script src="~/Content/plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="~/Content/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script src="~/js/site.js" asp-append-version="true"></script>
     <script>
+        $.widget.bridge('uibutton', $.ui.button)
+        $(document).ready(function () {
 
-        $(document).on("keyup", "#password", function () {
-            var input_pass = $("#password").val();
-            if (!isPasswordValid(input_pass)) {
-                $("#password").addClass('is-invalid');
-                $("#password").removeClass('is-valid');
-            } else {
-                $("#password").addClass('is-valid');
-                $("#password").removeClass('is-invalid');
+            var docHeight = $(window).height();
+            var footerHeight = $('.main-footer').height();
+            var footerTop = $('.main-footer').position().top + footerHeight;
+
+            if (footerTop < docHeight) {
+                $('.main-footer').css('margin-top', (docHeight - footerTop - 30) + 'px');
             }
         });
-
-        $(document).on("keyup", "#confirm-password", function () {
-            var input_pass = $("#password").val();
-            var confirm_pass = $("#confirm-password").val();
-            if (!isPassowrdConfirmMatch(input_pass, confirm_pass)) {
-                $("#confirm-password").addClass('is-invalid');
-                $("#confirm-password").removeClass('is-valid');
-            } else {
-                $("#confirm-password").addClass('is-valid');
-                $("#confirm-password").removeClass('is-invalid');
-            }
-        });
-
-
-
-        $(document).on("keyup", "#email", function () {
-
-            var email = $("#email").val();
-            if (!isEmailvalid(email)) {
-                $("#email").addClass('is-invalid');
-                $("#email").removeClass('is-valid');
-            } else {
-                $("#email").addClass('is-valid');
-                $("#email").removeClass('is-invalid');
-            }
-        });
-
-
-        $('#regiser-form').submit(function () {
-            //
-            var firstname = $("#firstname").val();
-            if (firstname.trim() === "") {
-                $("#firstname").addClass('is-invalid');
-                $("#firstname").removeClass('is-valid');
-                return false;
-            } else {
-                $("#firstname").addClass('is-valid');
-                $("#firstname").removeClass('is-invalid');
-            }
-            //
-            var lastname = $("#lastname").val();
-            if (lastname.trim() === "") {
-                $("#lastname").addClass('is-invalid');
-                $("#lastname").removeClass('is-valid');
-                return false;
-            } else {
-                $("#lastname").addClass('is-valid');
-                $("#lastname").removeClass('is-invalid');
-            }
-            //
-            //
-            var email = $("#email").val();
-            if (!isEmailvalid(email)) {
-                $("#email").addClass('is-invalid');
-                $("#email").removeClass('is-valid');
-                return false;
-            } else {
-                $("#email").addClass('is-valid');
-                $("#email").removeClass('is-invalid');
-            }
-            //
-            var input_pass = $("#password").val();
-            if (!isPasswordValid(input_pass)) {
-                $("#password").addClass('is-invalid');
-                $("#password").removeClass('is-valid');
-                return false;
-            } else {
-                $("#password").addClass('is-valid');
-                $("#password").removeClass('is-invalid');
-            }
-            //
-            var input_pass = $("#password").val();
-            var confirm_pass = $("#confirm-password").val();
-            if (!isPassowrdConfirmMatch(input_pass, confirm_pass)) {
-                $("#confirm-password").addClass('is-invalid');
-                $("#confirm-password").removeClass('is-valid');
-                return false;
-            } else {
-                $("#confirm-password").addClass('is-valid');
-                $("#confirm-password").removeClass('is-invalid');
-            }
-            return true;
-        });
-
-        function isEmailvalid(email) {
-            var validEmail = email.match(
-                /^(([^<>()[\]\\.,;:\s@@\"]+(\.[^<>()[\]\\.,;:\s@@\"]+)*)|(\".+\"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-            );
-            return validEmail;
-        }
-        function isPasswordValid(input_pass) {
-            var legnth = input_pass.length;
-            var hasCapitalletter = input_pass.toLowerCase() != input_pass;
-            var hasSmallLetter = input_pass.toUpperCase() != input_pass;
-            var hasDigits = /\d/.test(input_pass);
-            if (legnth >= 8 && hasCapitalletter && hasSmallLetter && hasDigits) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-        function isPassowrdConfirmMatch(input_pass, confirm_pass) {
-            if (input_pass !== confirm_pass) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-
     </script>
-}
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- ChartJS -->
+    <script src="~/Content/plugins/chart.js/Chart.min.js"></script>
+    <!-- Sparkline -->
+    <script src="~/Content/plugins/sparklines/sparkline.js"></script>
+    <!-- JQVMap -->
+    <script src="~/Content/plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script src="~/Content/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="~/Content/plugins/jquery-knob/jquery.knob.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="~/Content/plugins/moment/moment.min.js"></script>
+    <script src="~/Content/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="~/Content/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Summernote -->
+    <script src="~/Content/plugins/summernote/summernote-bs4.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="~/Content/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Content/dist/js/adminlte.js"></script>
+    @section Scripts{
+        <partial name="_ValidationScriptsPartial" />
+        <script>
+
+            $(document).on("keyup", "#password", function () {
+                var input_pass = $("#password").val();
+                if (!isPasswordValid(input_pass)) {
+                    $("#password").addClass('is-invalid');
+                    $("#password").removeClass('is-valid');
+                } else {
+                    $("#password").addClass('is-valid');
+                    $("#password").removeClass('is-invalid');
+                }
+            });
+
+            $(document).on("keyup", "#confirm-password", function () {
+                var input_pass = $("#password").val();
+                var confirm_pass = $("#confirm-password").val();
+                if (!isPassowrdConfirmMatch(input_pass, confirm_pass)) {
+                    $("#confirm-password").addClass('is-invalid');
+                    $("#confirm-password").removeClass('is-valid');
+                } else {
+                    $("#confirm-password").addClass('is-valid');
+                    $("#confirm-password").removeClass('is-invalid');
+                }
+            });
+
+
+
+            $(document).on("keyup", "#email", function () {
+
+                var email = $("#email").val();
+                if (!isEmailvalid(email)) {
+                    $("#email").addClass('is-invalid');
+                    $("#email").removeClass('is-valid');
+                } else {
+                    $("#email").addClass('is-valid');
+                    $("#email").removeClass('is-invalid');
+                }
+            });
+
+
+            $('#regiser-form').submit(function () {
+                //
+                var firstname = $("#firstname").val();
+                if (firstname.trim() === "") {
+                    $("#firstname").addClass('is-invalid');
+                    $("#firstname").removeClass('is-valid');
+                    return false;
+                } else {
+                    $("#firstname").addClass('is-valid');
+                    $("#firstname").removeClass('is-invalid');
+                }
+                //
+                var lastname = $("#lastname").val();
+                if (lastname.trim() === "") {
+                    $("#lastname").addClass('is-invalid');
+                    $("#lastname").removeClass('is-valid');
+                    return false;
+                } else {
+                    $("#lastname").addClass('is-valid');
+                    $("#lastname").removeClass('is-invalid');
+                }
+                //
+                //
+                var email = $("#email").val();
+                if (!isEmailvalid(email)) {
+                    $("#email").addClass('is-invalid');
+                    $("#email").removeClass('is-valid');
+                    return false;
+                } else {
+                    $("#email").addClass('is-valid');
+                    $("#email").removeClass('is-invalid');
+                }
+                //
+                var input_pass = $("#password").val();
+                if (!isPasswordValid(input_pass)) {
+                    $("#password").addClass('is-invalid');
+                    $("#password").removeClass('is-valid');
+                    return false;
+                } else {
+                    $("#password").addClass('is-valid');
+                    $("#password").removeClass('is-invalid');
+                }
+                //
+                var input_pass = $("#password").val();
+                var confirm_pass = $("#confirm-password").val();
+                if (!isPassowrdConfirmMatch(input_pass, confirm_pass)) {
+                    $("#confirm-password").addClass('is-invalid');
+                    $("#confirm-password").removeClass('is-valid');
+                    return false;
+                } else {
+                    $("#confirm-password").addClass('is-valid');
+                    $("#confirm-password").removeClass('is-invalid');
+                }
+                return true;
+            });
+
+            function isEmailvalid(email) {
+                var validEmail = email.match(
+                    /^(([^<>()[\]\\.,;:\s@@\"]+(\.[^<>()[\]\\.,;:\s@@\"]+)*)|(\".+\"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                );
+                return validEmail;
+            }
+            function isPasswordValid(input_pass) {
+                var legnth = input_pass.length;
+                var hasCapitalletter = input_pass.toLowerCase() != input_pass;
+                var hasSmallLetter = input_pass.toUpperCase() != input_pass;
+                var hasDigits = /\d/.test(input_pass);
+                if (legnth >= 8 && hasCapitalletter && hasSmallLetter && hasDigits) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            function isPassowrdConfirmMatch(input_pass, confirm_pass) {
+                if (input_pass !== confirm_pass) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+        </script>
+    }
+</body>
+

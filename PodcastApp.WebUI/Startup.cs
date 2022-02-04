@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PodcastApp.Domain.Models;
 using PodcastApp.Repository;
 using System;
 using System.Collections.Generic;

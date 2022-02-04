@@ -15,17 +15,17 @@ namespace PodcastApp.Repository
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         { }
         public DbSet<Podcast> Podcasts { get; set; }
-
+        public DbSet<Category> PodcastsCategories { get; set; }
 
     }
 
-    public class ApplicationUser : IdentityUser
-    {
-        [PersonalData]
-        public string FirstName { get; set; }
+    //public class ApplicationUser : IdentityUser
+    //{
+    //    [PersonalData]
+    //    public string FirstName { get; set; }
 
-        [PersonalData]
-        public string LastName { get; set; }
-    }
+    //    [PersonalData]
+    //    public string LastName { get; set; }
+    //}
 
 }

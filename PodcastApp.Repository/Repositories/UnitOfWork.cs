@@ -9,13 +9,16 @@ namespace PodcastApp.Repository
     {
         private readonly ApplicationDbContext _context;
         public IPodcastRepository Podcasts { get; }
-
+        public ICategoryRepository Categories { get; }
         public UnitOfWork(ApplicationDbContext podcastAppDbContext,
-            IPodcastRepository podcastRepository)
+            IPodcastRepository podcastRepository,
+            ICategoryRepository categoryRepository)
         {
             this._context = podcastAppDbContext;
 
             this.Podcasts = podcastRepository;
+
+            this.Categories = categoryRepository;
         }
         public int Complete()
         {
