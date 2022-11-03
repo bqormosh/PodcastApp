@@ -1,24 +1,37 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    List<PodcastApp.Domain.Models.Category> categories = ViewBag.CategoryList;
 }
 
 <div class="text-left">
     <div>Welcome, @User.Identity.FirstName() !</div>
     <div class="row">
-        <div class="col-lg-3 col-6">
+        @foreach (var catItem in categories)
+        {
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-info" style="padding:5px;">
+                    <div class="inner">
+                        <h3>@catItem.Name</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="~/Content/dist/img/avatar.png" style="width:100%; margin:0 10px 0 10px;" />
 
-            <div class="small-box bg-info">
-                <div class="inner">
-                    <h3>150</h3>
-                    <p>New Orders</p>
+                        </div>
+                        <div class="col-md-8">
+                            <p>@catItem.Description</p>
+
+                        </div>
+                    </div>
+                    <a href="#" class="small-box-footer">
+                        Explore <i class="fas fa-arrow-circle-right"></i>
+                    </a>
                 </div>
-                <div class="icon">
-                    <i class="fas fa-shopping-cart"></i>
-                </div>
-                <a href="#" class="small-box-footer">
-                    More info <i class="fas fa-arrow-circle-right"></i>
-                </a>
             </div>
+        }
+        @*// Add button*@
+        <div class="col-md-2">
+                <button type="button" class="btn btn-primary float-left"><i class="fas fa-plus"></i> Add Category</button>
         </div>
     </div>
 </div>

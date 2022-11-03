@@ -23,10 +23,10 @@ namespace PodcastApp.WebUI.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
-            _unitOfWork.Categories.Add(new Category {Name ="My first category",Description ="testing categories" });
-            _unitOfWork.Complete();
+            var categoriesList = await _unitOfWork.Categories.GetAll();
+            ViewBag.CategoryList = categoriesList.ToList();
             return View();
         }
 
