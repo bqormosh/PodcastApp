@@ -9,5 +9,7 @@ namespace PodcastApp.Domain.Interfaces
     public interface IPodcastRepository : IGenericRepository<Podcast>
     {
         Task<IEnumerable<Podcast>> GetPodcastsByName(string podcastName);
+
+        Task<IList<Podcast>> GetAllWithCategory();
     }
 }

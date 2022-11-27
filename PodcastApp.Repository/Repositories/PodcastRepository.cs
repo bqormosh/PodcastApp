@@ -1,4 +1,5 @@
-﻿using PodcastApp.Domain.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using PodcastApp.Domain.Interfaces;
 using PodcastApp.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -20,5 +21,9 @@ namespace PodcastApp.Repository
         }
 
 
+        async Task<IList<Podcast>> IPodcastRepository.GetAllWithCategory()
+        {
+            return await _context.Podcasts.Include(m => m.Category).ToListAsync();
+        }
     }
 }

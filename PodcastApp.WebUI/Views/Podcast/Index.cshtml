@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    List<PodcastApp.Domain.Models.Podcast> podcastsList = ViewBag.PodcastList;
+}
+
+<div class="text-left">
+    <div>Welcome, @User.Identity.FirstName() !</div>
+    <div class="row">
+        @foreach (var podcastItem in podcastsList)
+        {
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-info" style="padding:5px;">
+                    <div class="inner">
+                        <h3>@podcastItem.Name</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="~/Content/dist/img/avatar.png" style="width:100%; margin:0 10px 0 10px;" />
+
+                        </div>
+                        <div class="col-md-4">
+                            <p>@podcastItem.Category.Name</p>
+
+                        </div>
+                        <div class="col-md-4">
+                            <p>@podcastItem.Description</p>
+
+                        </div>
+                    </div>
+                    <a href="#" class="small-box-footer">
+                        Explore <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        }
+        @*// Add button*@
+        <div class="col-md-2">
+            <button type="button" class="btn btn-primary float-left"><i class="fas fa-plus"></i> Add Podcast</button>
+        </div>
+    </div>
+</div>

@@ -8,6 +8,7 @@ namespace PodcastApp.Domain.Interfaces
     {
         IPodcastRepository Podcasts { get; }
         ICategoryRepository Categories { get; }
+        IEpisodeRepository Episodes { get; }
         int Complete();
     }
 }

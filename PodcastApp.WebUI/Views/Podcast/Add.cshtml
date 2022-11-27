@@ -1,0 +1,65 @@
+﻿@model PodcastViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="row">
+    <!-- Input addon -->
+    <div class="card card-info" style="width:50%;">
+        <div class="card-header">
+            <h3 class="card-title">Add new Podcast</h3>
+        </div>
+        <form asp-controller="Podcast" asp-action="Add" method="post">
+            @Html.AntiForgeryToken()
+            <div class="text-danger">
+                @Html.ValidationSummary(false)
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Podcast Name</label>
+                    <input type="text" class="form-control" id="podcastName" placeholder="" asp-for="Name">
+                    <div class="invalid-feedback">Podcast name can not be empty</div>
+                    <div class="valid-feedback">Looks good!</div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Category</label>
+                    <select asp-for="CategoryId" asp-items="ViewBag.CategoriesList" class="form-control"></select>
+                    <div class="invalid-feedback">Please choose a category from the list</div>
+                    <div class="valid-feedback">Looks good!</div>
+                </div>
+                <!-- textarea -->
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control" rows="3" cols="80" placeholder="Enter ..." asp-for="Description"></textarea>
+                    <div class="invalid-feedback">Description can not be empty</div>
+                    <div class="valid-feedback">Looks good!</div>
+                </div>
+                <div class="card-footer" style="background-color:white;">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                <!-- /input-group -->
+            </div>
+            <!-- /.card-body -->
+        </form>
+    </div>
+    <!-- /.card -->
+    <!-- /.card -->
+</div>
+@section Styles{
+    <link rel="stylesheet" href='@Url.Content("~/Content/plugins/toastr/toastr.min.css")'>
+}
+@section Scripts{
+    <!-- Toastr -->
+    <script src='@Url.Content("~/Content/plugins/toastr/toastr.min.js")'></script>
+    <script>
+        $(function () {
+            // place your code
+            var result_status = '@ViewBag.ResultStatus';
+            if (result_status == 'success') {
+                toastr.success('new podcast added successfully');
+            } else {
+
+            }
+        });
+
+    </script>
+}

@@ -10,15 +10,18 @@ namespace PodcastApp.Repository
         private readonly ApplicationDbContext _context;
         public IPodcastRepository Podcasts { get; }
         public ICategoryRepository Categories { get; }
+        public IEpisodeRepository Episodes { get; }
         public UnitOfWork(ApplicationDbContext podcastAppDbContext,
-            IPodcastRepository podcastRepository,
-            ICategoryRepository categoryRepository)
+                    IPodcastRepository podcastRepository,
+                    ICategoryRepository categoryRepository,
+                    IEpisodeRepository episodeRepository
+                    )
         {
             this._context = podcastAppDbContext;
 
             this.Podcasts = podcastRepository;
-
             this.Categories = categoryRepository;
+            this.Episodes = episodeRepository;
         }
         public int Complete()
         {

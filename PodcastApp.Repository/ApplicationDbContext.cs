@@ -16,7 +16,7 @@ namespace PodcastApp.Repository
         { }
         public DbSet<Podcast> Podcasts { get; set; }
         public DbSet<Category> PodcastsCategories { get; set; }
-
+        public DbSet<Episode> PodcastEpisodes { get; set; }
     }
 
     //public class ApplicationUser : IdentityUser
